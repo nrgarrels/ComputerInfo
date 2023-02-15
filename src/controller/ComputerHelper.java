@@ -15,6 +15,7 @@ public class ComputerHelper {
 	
 	static EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("ComputerInfo");
 	
+	
 	public void insertItem(Computers ci) {
 		
 		EntityManager em = emfactory.createEntityManager();
