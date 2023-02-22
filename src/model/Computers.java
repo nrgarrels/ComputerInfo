@@ -1,9 +1,15 @@
 package model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,7 +26,9 @@ public class Computers {
 	private String type;
 	@Column(name="OS")
 	private String os;
-
+	@OneToMany(cascade=CascadeType.PERSIST, fetch=FetchType.EAGER, targetEntity=ComputerTech.class)
+	@JoinColumn(name = "COMPUTERS_ID", referencedColumnName = "ID")
+	private List<ComputerTech> ComputerTech;
 	
 	//default no arg
 	public Computers() {
@@ -36,6 +44,13 @@ public class Computers {
 	}
 
 	//Getters and Setters
+	public List<ComputerTech> getComputerTech() {
+		return ComputerTech;
+	}
+
+	public void setComputerTech(List<ComputerTech> students) {
+		this.ComputerTech = students;
+	}
 	public String getType() {
 		return type;
 	}

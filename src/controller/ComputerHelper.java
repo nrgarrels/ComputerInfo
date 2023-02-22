@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
+
+import model.ComputerTech;
 import model.Computers;
 
 
@@ -109,5 +111,27 @@ public class ComputerHelper {
 		em.close();
 		
 	}
-
+	public void persistComputers(Computers model) throws Exception{
+		EntityManager manager = emfactory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(model);
+		manager.getTransaction().commit();
+		manager.close();
+		
+	}
+	
+	public void persistComputerTech(ComputerTech model) throws Exception{
+		EntityManager manager = emfactory.createEntityManager();
+		manager.getTransaction().begin();
+		manager.merge(model);
+		manager.getTransaction().commit();
+		manager.close();
+		
+	}
+	@SuppressWarnings("unchecked")
+	public List<Computers> showAllComputersList() {
+		EntityManager em = emfactory.createEntityManager();
+		List<Computers> allItems = em.createQuery("SELECT i FROM Computers i").getResultList();
+		return allItems;
+	}
 }
